@@ -2,7 +2,7 @@ export enum BoardType {
     Empty=0,
     X,
     O
-}
+};
 
 export function boardTypeToStr(t : BoardType) {
     switch(t) { 

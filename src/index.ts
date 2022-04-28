@@ -7,10 +7,11 @@ let board = new Board(null);
 const status = document.querySelector('.game--status');
 let gameOver = false;
 
-function updateBoard(index : number, clickedCell: Element) {
+// @TODO: go back to returnning a boolean in case the play clicked on a cell that has already been selected.
+function updateBoard(index : number, clickedCell: Element)  {
+    console.log(index);
     const boardUpdatedBy = board.updateBoard(index);
 
-    console.log()
     if (!gameOver && boardUpdatedBy !== BoardType.Empty) {
         // handle player result
         let boardStatus = board.boardStatus();
@@ -27,7 +28,10 @@ function updateBoard(index : number, clickedCell: Element) {
         }
         
         clickedCell.innerHTML = boardTypeToStr(boardUpdatedBy);
+        // return true; // board updated
     }
+
+    // return false; // board not updated
 }
 
 function handleCellClick(clickedCellEvent: Event) {
@@ -39,6 +43,9 @@ function handleCellClick(clickedCellEvent: Event) {
 
     let index : number = Number(clickedCell.getAttribute('index'));
     updateBoard(index, clickedCell);
+    // if (!updateBoard(index, clickedCell)) {
+    //     return;
+    // }
 
     if(gameOver) return;
 

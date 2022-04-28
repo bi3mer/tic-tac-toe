@@ -28,7 +28,6 @@ export class Board {
             }
         } else {
             this.player = board.player;
-
             for(let i = 0; i < 9; ++i) {
                 this.b[i] = board.b[i];
             }
@@ -125,20 +124,20 @@ export class Board {
      * @returns [score, index]
      */
     private getBoardScore() : number {
+        // check if game is over and return result
         const status = this.boardStatus();
-        
         if (status !== BoardStatus.None) {
             return boardStatusToNumber(status);
         }
 
+        // Go through all possible board states and recursively evaluate them.
         let result = 0;
-
         let nodes = this.possibleBoardStates();
         for(let i = 0; i < nodes.length; ++i) {
             result += nodes[i][2].getBoardScore();
         }
 
-        return result;
+        return result / nodes.length;
     }
 
     getNextMove() : number {
@@ -147,6 +146,7 @@ export class Board {
 
         for (let i = 0; i < nodes.length; ++i) {
             moves.push([nodes[i][1], nodes[i][2].getBoardScore()])
+            console.log(nodes[i][1] + ',' + moves[moves.length -1][1])
         }
         
         let result = moves[0];
@@ -155,7 +155,7 @@ export class Board {
                 result = moves[i];
             }
         }
-
+        
         return result[0];
     }
 }

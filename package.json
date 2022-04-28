@@ -12,5 +12,8 @@
   },
   "version": "1.0.0",
   "description": "tic-tac-toe",
-  "name": "tic-tac-toe"
+  "name": "tic-tac-toe",
+  "dependencies": {
+    "@types/web": "^0.0.62"
+  }
 }

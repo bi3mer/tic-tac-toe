@@ -133,11 +133,19 @@ export class Board {
         // Go through all possible board states and recursively evaluate them.
         let result = 0;
         let nodes = this.possibleBoardStates();
-        for(let i = 0; i < nodes.length; ++i) {
-            result += nodes[i][2].getBoardScore();
-        }
 
-        return result / nodes.length;
+        if (this.player === BoardType.O) {
+            for(let i = 0; i < nodes.length; ++i) {
+                result = Math.max(result, nodes[i][2].getBoardScore());
+            }
+        } else {
+            result = 10
+            for(let i = 0; i < nodes.length; ++i) {
+                result = Math.min(result, nodes[i][2].getBoardScore());
+            }
+        }
+        
+        return result;
     }
 
     getNextMove() : number {

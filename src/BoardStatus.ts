@@ -11,7 +11,7 @@ export function boardStatusToNumber(bs : BoardStatus) : number {
     } else if (bs === BoardStatus.O) {
         return 1;
     } else if (bs == BoardStatus.Draw) {
-        return 0;
+        return 0.1;
     } else {
         return 0;
     }
